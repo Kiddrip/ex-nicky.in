@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ex-Nicky — Official</title>
+  <meta name="description" content="Official site for Ex-Nicky — unreleased tracks and albums." />
+  <style>
+    :root{
+      --bg:#050505;
+      --card:#0b0b0b;
+      --muted:#bdbdbd;
+      --accent:#ffd400;
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0; background:linear-gradient(180deg,var(--bg),#070707); color:#fff; line-height:1.4;}
+    a{color:var(--accent); text-decoration:none;}
+    header{position:sticky; top:0; backdrop-filter:blur(6px); background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.15)); border-bottom:1px solid rgba(255,255,255,0.03); z-index:40;}
+    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:16px;}
+    .brand{display:flex; gap:12px; align-items:center;}
+    .logo{width:46px; height:46px; border-radius:10px; background:linear-gradient(135deg,#111,#000); display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--accent); font-size:18px;}
+    nav a{margin:0 10px; color:var(--muted); font-weight:600;}
+    .cta{background:transparent; border:1px solid var(--accent); padding:8px 12px; border-radius:10px; color:var(--accent); font-weight:700;}
+
+    .hero{max-width:1100px; margin:48px auto; padding:24px; display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:center;}
+    .hero-left h1{font-size:44px; margin:0 0 10px; color:var(--accent); letter-spacing:1px;}
+    .hero-left p{color:var(--muted); margin:0 0 18px;}
+    .buttons{display:flex; gap:12px;}
+    .btn{padding:12px 16px; border-radius:12px; font-weight:700; border:0; cursor:pointer;}
+    .btn-primary{background:var(--accent); color:#000;}
+    .btn-outline{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);}
+
+    .hero-right{background:var(--glass); border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:12px; align-items:center;}
+    .artist-pic{width:320px; height:320px; border-radius:12px; background:#111; display:flex; align-items:center; justify-content:center; color:var(--muted); /* if you upload photo, it shows here */}
+
+    .container{max-width:1100px; margin:28px auto; padding:0 18px;}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(0,0,0,0.02)); padding:18px; border-radius:12px; margin-bottom:18px; border:1px solid rgba(255,255,255,0.03);}
+    h2{margin:0 0 12px; color:var(--accent);}
+
+    .tracks{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;}
+    .track{display:flex; gap:12px; align-items:center; padding:12px; background:#080808; border-radius:12px;}
+    .cover{width:72px; height:72px; border-radius:8px; background:#111; display:flex; align-items:center; justify-content:center; color:var(--muted);}
+    .meta{flex:1;}
+    .meta h3{margin:0; font-size:16px;}
+    .meta p{margin:4px 0 0; color:var(--muted); font-size:13px;}
+    .actions{display:flex; gap:8px; align-items:center;}
+    .play{padding:8px 10px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.04);}
+
+    footer{border-top:1px solid rgba(255,255,255,0.03); padding:24px 0; color:var(--muted); margin-top:40px;}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{order:-1;}
+      .artist-pic{width:100%; height:240px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">EN</div>
+        <div>
+          <div style="font-weight:800">Ex-Nicky</div>
+          <div style="font-size:13px; color:var(--muted)">Official Music • Unreleased Drops</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#music">Music</a>
+        <a href="#albums">Albums</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#music">Latest</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-left">
+        <h1>Welcome to Ex-Nicky Official Site</h1>
+        <p>Exclusive unreleased tracks and albums — direct downloads. New drops will appear here when uploaded to the repo.</p>
+        <div class="buttons">
+          <button class="btn btn-primary" id="jumpToLatest">Listen to Latest</button>
+          <button class="btn btn-outline" id="openMusic">Browse All Music</button>
+        </div>
+      </div>
+      <aside class="hero-right">
+        <div class="artist-pic">
+          <!-- If you upload your photo in /images/you.jpg, it shows here. Otherwise this dark box. -->
+        </div>
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Latest Release</strong><span style="font-size:13px;color:var(--muted)" id="latestDate">—</span>
+          </div>
+          <div id="latestBlock" style="margin-top:10px">Loading latest…</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="music" class="container">
+      <div class="card">
+        <h2>Unreleased Songs</h2>
+        <div id="tracks" class="tracks">
+          <!-- Tracks injected by JavaScript from releases.json -->
+        </div>
+      </div>
+
+      <div id="albums" class="card">
+        <h2>Albums & ZIPs</h2>
+        <div id="albumsList">
+          <!-- Albums injected here -->
+        </div>
+      </div>
+
+      <div id="about" class="card">
+        <h2>About Ex-Nicky</h2>
+        <p>Ex-Nicky is an independent artist sharing unreleased material directly with fans.</p>
+        <p>This site is a static site via GitHub Pages — upload files and update <code>releases.json</code> to make them show up automatically.</p>
+      </div>
+
+      <div id="contact" class="card">
+        <h2>Contact</h2>
+        <p>Follow me on Instagram: <a href="https://www.instagram.com/k1ddripnoir?igsh=MXIzeGY3Z3k4eTc3dw==" target="_blank">@k1ddripnoir</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;padding:0 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;color:var(--muted);">
+      <div>© 2025 Ex-Nicky. All rights reserved.</div>
+      <div style="font-size:13px;">Follow on Instagram: <a href="https://www.instagram.com/k1ddripnoir?igsh=MXIzeGY3Z3k4eTc3dw==" target="_blank">@k1ddripnoir</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const fallback = {
+      latest: {title:'Sample Track', file:'songs/sample.mp3', preview:'songs/sample.mp3', cover:'', date:'2025-09-14'},
+      tracks: [ {title:'Sample Track', file:'songs/sample.mp3', preview:'songs/sample.mp3', cover:'', date:'2025-09-14'} ],
+      albums: [ {title:'Sample Album', file:'albums/sample_album.zip', cover:'', date:'2025-09-14'} ]
+    };
+
+    async function loadReleases(){
+      try{
+        const r = await fetch('releases.json', {cache:'no-store'});
+        if(!r.ok) throw new Error('no releases.json');
+        const data = await r.json();
+        return data;
+      }catch(e){
+        console.warn('Could not load releases.json — using fallback', e);
+        return fallback;
+      }
+    }
+
+    function el(tag,props={},children=[]){
+      const node = document.createElement(tag);
+      for(const k in props) node.setAttribute(k,props[k]);
+      (Array.isArray(children)?children:[children]).flat().forEach(c=>{
+        if(typeof c==='string') node.append(c);
+        else node.appendChild(c)
+      });
+      return node;
+    }
+
+    function render(data){
+      const tracksRoot = document.getElementById('tracks');
+      tracksRoot.innerHTML='';
+      data.tracks.forEach(t=>{
+        const cover = el('div',{class:'cover'}, [
+          t.cover ? el('img',{src:t.cover,alt:t.title,style:'width:100%;height:100%;object-fit:cover;border-radius:8px'}) : '✦'
+        ]);
+        const title = el('h3',{}, t.title);
+        const meta = el('p',{}, (t.date||'') + (t.preview? ' • preview available':''));
+        const metaWrap = el('div',{class:'meta'}, [title, meta]);
+        const audio = el('audio',{controls:'',preload:'none',style:'width:160px;display:block'});
+        audio.src = t.preview ? t.preview : t.file;
+        const download = el('a',{href:t.file,download:'',class:'play'}, 'Download');
+        const actions = el('div',{class:'actions'}, [audio, download]);
+        const track = el('div',{class:'track'}, [cover, metaWrap, actions]);
+        tracksRoot.appendChild(track);
+      });
+
+      const latestBlock = document.getElementById('latestBlock');
+      const latestDate = document.getElementById('latestDate');
+      latestBlock.innerHTML='';
+      const L = data.latest || data.tracks[0];
+      latestDate.textContent = L.date || '';
+      const lt = el('div',{}, [
+        el('div',{style:'font-weight:700;margin-bottom:6px'}, L.title),
+        el('div',{}, el('a',{href:L.file,download:''}, 'Download Latest'))
+      ]);
+      latestBlock.appendChild(lt);
+
+      const albumsRoot = document.getElementById('albumsList');
+      albumsRoot.innerHTML='';
+      data.albums.forEach(a=>{
+        const aDiv = el('div',{}, [
+          el('div',{style:'display:flex;justify-content:space-between;align-items:center'}, [
+            el('div',{}, [el('strong',{}, a.title), el('div',{style:'font-size:13px;color:var(--muted)'}, a.date||'')]),
+            el('a',{href:a.file,download:''}, 'Download ZIP')
+          ])
+        ]);
+        albumsRoot.appendChild(aDiv);
+      });
+    }
+
+    (async()=>{
+      const data = await loadReleases();
+      render(data);
+    })();
+
+    document.getElementById('openMusic').addEventListener('click', ()=> location.href='#music');
+    document.getElementById('jumpToLatest').addEventListener('click', ()=>{ document.getElementById('latestBlock').scrollIntoView({behavior:'smooth'}); });
+  </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ex-Nicky — Official</title>
+  <meta name="description" content="Official site for Ex-Nicky — unreleased tracks and albums." />
+  <style>
+    :root{
+      --bg:#050505;
+      --card:#0b0b0b;
+      --muted:#bdbdbd;
+      --accent:#ffd400;
+      --glass: rgba(255,255,255,0.03);
+      --radius:16px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0; background:linear-gradient(180deg,var(--bg),#070707); color:#fff; line-height:1.4;}
+    a{color:var(--accent); text-decoration:none;}
+    header{position:sticky; top:0; backdrop-filter:blur(6px); background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.15)); border-bottom:1px solid rgba(255,255,255,0.03); z-index:40;}
+    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:16px;}
+    .brand{display:flex; gap:12px; align-items:center;}
+    .logo{width:46px; height:46px; border-radius:10px; background:linear-gradient(135deg,#111,#000); display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--accent); font-size:18px;}
+    nav a{margin:0 10px; color:var(--muted); font-weight:600;}
+    .cta{background:transparent; border:1px solid var(--accent); padding:8px 12px; border-radius:10px; color:var(--accent); font-weight:700;}
+
+    .hero{max-width:1100px; margin:48px auto; padding:24px; display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:center;}
+    .hero-left h1{font-size:44px; margin:0 0 10px; color:var(--accent); letter-spacing:1px;}
+    .hero-left p{color:var(--muted); margin:0 0 18px;}
+    .buttons{display:flex; gap:12px;}
+    .btn{padding:12px 16px; border-radius:12px; font-weight:700; border:0; cursor:pointer;}
+    .btn-primary{background:var(--accent); color:#000;}
+    .btn-outline{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);}
+
+    .hero-right{background:var(--glass); border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:12px; align-items:center;}
+    .artist-pic{width:320px; height:320px; border-radius:12px; background:#111; display:flex; align-items:center; justify-content:center; color:var(--muted); /* if you upload photo, it shows here */}
+
+    .container{max-width:1100px; margin:28px auto; padding:0 18px;}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(0,0,0,0.02)); padding:18px; border-radius:12px; margin-bottom:18px; border:1px solid rgba(255,255,255,0.03);}
+    h2{margin:0 0 12px; color:var(--accent);}
+
+    .tracks{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;}
+    .track{display:flex; gap:12px; align-items:center; padding:12px; background:#080808; border-radius:12px;}
+    .cover{width:72px; height:72px; border-radius:8px; background:#111; display:flex; align-items:center; justify-content:center; color:var(--muted);}
+    .meta{flex:1;}
+    .meta h3{margin:0; font-size:16px;}
+    .meta p{margin:4px 0 0; color:var(--muted); font-size:13px;}
+    .actions{display:flex; gap:8px; align-items:center;}
+    .play{padding:8px 10px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.04);}
+
+    footer{border-top:1px solid rgba(255,255,255,0.03); padding:24px 0; color:var(--muted); margin-top:40px;}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{order:-1;}
+      .artist-pic{width:100%; height:240px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">EN</div>
+        <div>
+          <div style="font-weight:800">Ex-Nicky</div>
+          <div style="font-size:13px; color:var(--muted)">Official Music • Unreleased Drops</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#music">Music</a>
+        <a href="#albums">Albums</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#music">Latest</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-left">
+        <h1>Welcome to Ex-Nicky Official Site</h1>
+        <p>Exclusive unreleased tracks and albums — direct downloads. New drops will appear here when uploaded to the repo.</p>
+        <div class="buttons">
+          <button class="btn btn-primary" id="jumpToLatest">Listen to Latest</button>
+          <button class="btn btn-outline" id="openMusic">Browse All Music</button>
+        </div>
+      </div>
+      <aside class="hero-right">
+        <div class="artist-pic">
+          <!-- If you upload your photo in /images/you.jpg, it shows here. Otherwise this dark box. -->
+        </div>
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Latest Release</strong><span style="font-size:13px;color:var(--muted)" id="latestDate">—</span>
+          </div>
+          <div id="latestBlock" style="margin-top:10px">Loading latest…</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="music" class="container">
+      <div class="card">
+        <h2>Unreleased Songs</h2>
+        <div id="tracks" class="tracks">
+          <!-- Tracks injected by JavaScript from releases.json -->
+        </div>
+      </div>
+
+      <div id="albums" class="card">
+        <h2>Albums & ZIPs</h2>
+        <div id="albumsList">
+          <!-- Albums injected here -->
+        </div>
+      </div>
+
+      <div id="about" class="card">
+        <h2>About Ex-Nicky</h2>
+        <p>Ex-Nicky is an independent artist sharing unreleased material directly with fans.</p>
+        <p>This site is a static site via GitHub Pages — upload files and update <code>releases.json</code> to make them show up automatically.</p>
+      </div>
+
+      <div id="contact" class="card">
+        <h2>Contact</h2>
+        <p>Follow me on Instagram: <a href="https://www.instagram.com/k1ddripnoir?igsh=MXIzeGY3Z3k4eTc3dw==" target="_blank">@k1ddripnoir</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;padding:0 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;color:var(--muted);">
+      <div>© 2025 Ex-Nicky. All rights reserved.</div>
+      <div style="font-size:13px;">Follow on Instagram: <a href="https://www.instagram.com/k1ddripnoir?igsh=MXIzeGY3Z3k4eTc3dw==" target="_blank">@k1ddripnoir</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const fallback = {
+      latest: {title:'Sample Track', file:'songs/sample.mp3', preview:'songs/sample.mp3', cover:'', date:'2025-09-14'},
+      tracks: [ {title:'Sample Track', file:'songs/sample.mp3', preview:'songs/sample.mp3', cover:'', date:'2025-09-14'} ],
+      albums: [ {title:'Sample Album', file:'albums/sample_album.zip', cover:'', date:'2025-09-14'} ]
+    };
+
+    async function loadReleases(){
+      try{
+        const r = await fetch('releases.json', {cache:'no-store'});
+        if(!r.ok) throw new Error('no releases.json');
+        const data = await r.json();
+        return data;
+      }catch(e){
+        console.warn('Could not load releases.json — using fallback', e);
+        return fallback;
+      }
+    }
+
+    function el(tag,props={},children=[]){
+      const node = document.createElement(tag);
+      for(const k in props) node.setAttribute(k,props[k]);
+      (Array.isArray(children)?children:[children]).flat().forEach(c=>{
+        if(typeof c==='string') node.append(c);
+        else node.appendChild(c)
+      });
+      return node;
+    }
+
+    function render(data){
+      const tracksRoot = document.getElementById('tracks');
+      tracksRoot.innerHTML='';
+      data.tracks.forEach(t=>{
+        const cover = el('div',{class:'cover'}, [
+          t.cover ? el('img',{src:t.cover,alt:t.title,style:'width:100%;height:100%;object-fit:cover;border-radius:8px'}) : '✦'
+        ]);
+        const title = el('h3',{}, t.title);
+        const meta = el('p',{}, (t.date||'') + (t.preview? ' • preview available':''));
+        const metaWrap = el('div',{class:'meta'}, [title, meta]);
+        const audio = el('audio',{controls:'',preload:'none',style:'width:160px;display:block'});
+        audio.src = t.preview ? t.preview : t.file;
+        const download = el('a',{href:t.file,download:'',class:'play'}, 'Download');
+        const actions = el('div',{class:'actions'}, [audio, download]);
+        const track = el('div',{class:'track'}, [cover, metaWrap, actions]);
+        tracksRoot.appendChild(track);
+      });
+
+      const latestBlock = document.getElementById('latestBlock');
+      const latestDate = document.getElementById('latestDate');
+      latestBlock.innerHTML='';
+      const L = data.latest || data.tracks[0];
+      latestDate.textContent = L.date || '';
+      const lt = el('div',{}, [
+        el('div',{style:'font-weight:700;margin-bottom:6px'}, L.title),
+        el('div',{}, el('a',{href:L.file,download:''}, 'Download Latest'))
+      ]);
+      latestBlock.appendChild(lt);
+
+      const albumsRoot = document.getElementById('albumsList');
+      albumsRoot.innerHTML='';
+      data.albums.forEach(a=>{
+        const aDiv = el('div',{}, [
+          el('div',{style:'display:flex;justify-content:space-between;align-items:center'}, [
+            el('div',{}, [el('strong',{}, a.title), el('div',{style:'font-size:13px;color:var(--muted)'}, a.date||'')]),
+            el('a',{href:a.file,download:''}, 'Download ZIP')
+          ])
+        ]);
+        albumsRoot.appendChild(aDiv);
+      });
+    }
+
+    (async()=>{
+      const data = await loadReleases();
+      render(data);
+    })();
+
+    document.getElementById('openMusic').addEventListener('click', ()=> location.href='#music');
+    document.getElementById('jumpToLatest').addEventListener('click', ()=>{ document.getElementById('latestBlock').scrollIntoView({behavior:'smooth'}); });
+  </script>
+</body>
+</html>
